@@ -314,4 +314,22 @@ void loop() {
  *    introduced in the analysis activities, above, modify your start-stop
  *    program to make it safer. SW3 should only be able to turn LED D3 on if
  *    switch SW4 is not being pressed at the same time.
+ *
+ * 9. Create a program that uses the ARPS pushbuttons and LEDs to make a turn
+ *    signal circuit for a bicycle. Use SW2 and SW5 to indicate left or right
+ *    turns, and think about the best way to implement turn signals if a pair
+ *    of similar momentary pushbuttons were mounted on a bicycle's handlebars.
+ *    Would the user have to hold the button to keep the turn signal flashing,
+ *    or would pressing the button once start the turn signal and keep it going
+ *    until the button was pressed again to cancel it? What will the turn signal
+ *    indication look like if the four LEDs were to be mounted horizontally
+ *    under the seat of the bicycle? Write a program that implements your best
+ *    turn signal solution using the concepts learned in this activity. Test
+ *    your solution to ensure it behaves as expected under unusual use cases
+ *    such as the user holding both buttons, for example.
+ *
+ *10. Modify your bike turn signal program, above, to use one or both of the
+ *    other buttons to add brake functionality, and/or to implement a rapidly
+ *    flashing tail-light for enhanced visibility. Test your program to ensure
+ *    that all of the functions work as expected under all conditions.
  */
