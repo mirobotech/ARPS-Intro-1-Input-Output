@@ -1,6 +1,6 @@
 /*
 Project:  Intro-1-Input-Output        Activity: mirobo.tech/arps-intro-1
-Date:     January 5, 2024
+Date:     January 9, 2024
  
 This introductory input and output programming activity for the mirobo.tech
 ARPS circuit demonstrates pushbutton input, LED outut, the use of time delay
@@ -72,7 +72,7 @@ void loop() {
   }
 
   // Add your Program Analysis Activities and Programming Activities code here:
- 
+
   delay(10);  // Added delay helps simulators run this program
 }
 
@@ -151,7 +151,7 @@ void loop() {
   digitalWrite(LED4,LOW);
 
  *    First, try pressing and releasing SW3 and SW4 one at a time. They should
- *    act the same way, turning their respective LED on as each switch is
+ *    act the same way, turning their respective LEDs on as each switch is
  *    pressed, and off as each switch is released.
  * 
  *    Next, press and hold SW3 while pressing and releasing SW4. Does SW4 work
@@ -163,17 +163,18 @@ void loop() {
  *    Can you explain the difference in operation between the 'if' and 'while'
  *    structures in the two different examples of momentary button code?
  *
- * 7. Inside the while loop added in the above step, comment-out the statement
- *   'SW4state = digitalRead(SW4);' by adding two slashes '//' at the start
- *    of the line, like this: '//SW4state = digitalRead(SW4);'. Re-upload
- *    your program and test both SW3 and SW4 again. If the program seems to be
- *    getting stuck, press and release the RESET pushbutton to re-start it.
- *    Explain what you think is happening and why the microcontroller might
- *    be doing that. 
+ * 7. Comment-out the second 'SW4state = digitalRead(SW4);' (the one inside 
+ *    the while loop) by adding two slashes '//' at the start of the line,
+ *    like this: '//SW4state = digitalRead(SW4);'. Re-upload your program and
+ *    test SW4 again. After that, try testing SW2 and SW3. Do they still work?
+ *    If the program seems to be getting stuck, press and release the SW1
+ *    RESET pushbutton to re-start it. Explain what you think is happening and
+ *    why the microcontroller might be doing that. 
  * 
- * 8. Let's explore logical conditions using 'if' statements. Replace the code
- *    added in step 7, above, with this 'nested if' code to make a logical AND
- *    condition that will light LED D3 only if both SW3 and SW4 are pressed:
+ * 8. Let's explore logical conditions made using 'if' statements. Replace the
+ *    program code added in steps 6 and 7, above, with this 'nested if' code
+ *    to create a logical AND condition that will light LED D3 only if both
+ *    SW3 and SW4 are pressed:
 
   SW3state = digitalRead(SW3);
   SW4state = digitalRead(SW4);
@@ -194,7 +195,7 @@ void loop() {
  *    conditions matter? (e.g. swap the conditional checks for SW3 and SW4)
  * 
  * 9. Next, replace the code from activity 8, above, with the following code
- *    which implements the logical AND conditional operator -- it's composed of
+ *    which implements the logical AND conditional operator – it's composed of
  *    two ampersands '&&' and becomes part of the 'if' statement:
  
   SW3state = digitalRead(SW3);
@@ -237,14 +238,16 @@ void loop() {
  * 
  * 2. The 'delay()' function accepts only integers as delay values. To create
  *    delays shorter than 1 ms, a different function must be used instead. Use
- *    the 'delayMicroseconds()' function to specify delays in microseconds.
+ *    the 'delayMicroseconds()' function to specify time delays in
+ *    microseconds instead of milliseconds.
  * 
  *    You won't be able to see microsecond length LED flashes with your eyes,
- *    but you can measure them using an oscilloscope, or hear them if they are
+ *    but you can measure them using an oscilloscope or hear them if they are
  *    used to turn the piezo beeper on and off. Try the following code in your
  *    program. The delay was chosen to be the time period of music note A5
- *    which will play a tone at a frequency of 880Hz.
+ *    which should play a tone at a frequency of 880Hz.
  
+  SW5state = digitalRead(SW5);    // Make a tone while SW5 is held
   if(SW5state == LOW) {
     digitalWrite(BEEPER,HIGH);
     delayMicroseconds(567);
@@ -252,16 +255,16 @@ void loop() {
     delayMicroseconds(567);
   }
 
- *    It definitely makes a sound, but it doesn't sound like the note it is
- *    supposed to play. Can you guess why?
+ *    It definitely makes a sound when SW5 is pressed, but it doesn't sound
+ *    like the note that it is supposed to play. Can you guess why?
  * 
  *    The 'delay(10);' statement at the end of the program is the problem – it
  *    makes the delay muuuuuch longer than 567µs. The 10ms delay is not needed
  *    when running the program in an actual Arduino circuit, but it has been
  *    added to this program because it helps some Arduino simulators work better
  *    by limiting the number of times the main loop runs every second. Comment
- *    out the 'delay(10);' statement for the remainder of these activities and
- *    try the program again.
+ *    out the 'delay(10);' statement for the remainder of the programming
+ *    activities in this program and try the program in your circuit again.
  *
  *    Did it sound more like a tone now? Next, try changing the delay values.
  *    Does the pitch of the tone increase or decrease if the delay values are
@@ -271,17 +274,15 @@ void loop() {
  *    specified sound frequency without the programmer needing to calculate a
  *    delay time period. Replace the code, above, with this code:
  
-  // Make a tone while SW5 is held
-  SW5state = digitalRead(SW5);
-
+  SW5state = digitalRead(SW5);    // Make a tone while SW5 is held
   if(SW5state == LOW) {
     tone(BEEPER,880);
   }
 
  *    The tone can be silenced by pressing the RESET (SW1) button on ARPS, or
  *    in your program by using a 'noTone(BEEPER);' statement. Modify your
- *    program using another 'if' condition so that the tone plays only while
- *    SW5 is held and stops when SW5 is released.
+ *    program using either a second 'if' condition or an 'else' condition so
+ *.   that the it only plays while SW5 is held and stops when SW5 is released.
  *
  * 4. The setup() function includes a tone() function to make a sound on
  *    start-up. How is the tone() function in setup() different than the one
@@ -306,7 +307,8 @@ void loop() {
  *    pushbuttons SW3 and SW4 are held. Does LED D3 turn on? Does LED D3 stay
  *    on? If so, is its brightness the same when both buttons are held as when
  *    just SW3 is pressed? If the brightness is different, can you explain what
- *.   part of the code might be causing it to change, and why it changes?
+ *    part of the code might be causing it to change, and why it changes?
+ *    Hint: pretend to be the computer and simulate what the program is doing.
  * 
  * 8. As you might imagine, an industrial machine that is able to turn on an
  *    output even while its 'Stop' button is pressed represents a significant
@@ -331,5 +333,5 @@ void loop() {
  *10. Modify your bike turn signal program, above, to use one or both of the
  *    other buttons to add brake functionality, and/or to implement a rapidly
  *    flashing tail-light for enhanced visibility. Test your program to ensure
- *    that all of the functions work as expected under all conditions.
+ *    that all of its functions work as expected under all conditions.
  */
