@@ -274,7 +274,7 @@ void loop() {
  *    specified sound frequency without the programmer needing to calculate a
  *    delay time period. Replace the code, above, with this code:
  
-  SW5state = digitalRead(SW5);    // Make a tone while SW5 is held
+  SW5state = digitalRead(SW5);    // Make a tone when SW5 is pressed
   if(SW5state == LOW) {
     tone(BEEPER,880);
   }
@@ -282,7 +282,7 @@ void loop() {
  *    The tone can be silenced by pressing the RESET (SW1) button on ARPS, or
  *    in your program by using a 'noTone(BEEPER);' statement. Modify your
  *    program using either a second 'if' condition or an 'else' condition so
- *.   that the it only plays while SW5 is held and stops when SW5 is released.
+ *    that the it only plays while SW5 is held and stops when SW5 is released.
  *
  * 4. The setup() function includes a tone() function to make a sound on
  *    start-up. How is the tone() function in setup() different than the one
