@@ -1,21 +1,21 @@
 /*
-Project:  Intro-1-Input-Output        Activity: mirobo.tech/arps-intro-1
-Date:     January 9, 2024
+ Project:  Intro-1-Input-Output        Activity: mirobo.tech/arps-intro-1
+ Date:     January 12, 2024
  
-This introductory input and output programming activity for the mirobo.tech
-ARPS circuit demonstrates pushbutton input, LED outut, the use of time delay
-functions, and simple 'if' condition structures.
+ This introductory programming activity for the mirobo.tech ARPS circuit
+ demonstrates pushbutton input, LED outut, the use of time delay functions,
+ and simple 'if' condition structures.
  
-Additional program analysis and programming activities demonstrate logical
-AND and OR conditional operators, the tone() function to create sound, and
-software-based simulated start-stop button functionality.
+ Additional program analysis and programming activities demonstrate logical
+ AND and OR conditional operators, the tone() function to create sound, and
+ software-based simulated start-stop button functionality.
 */
 
 // Define I/O pins used for human interface devices
-const int SW2 = 0;      // ARPS pushbuttons
-const int SW3 = 1;
-const int SW4 = 2;
-const int SW5 = 3;
+const int SW2 = 0;      // ARPS pushbuttons SW2 and SW3 are supported on
+const int SW3 = 1;      // Arduino UNO R4 Minima and Arduino UNO R4 WiFi
+const int SW4 = 2;      // ARPS pushbuttons SW4 and SW5 work on all
+const int SW5 = 3;      // Arduino UNO R3 and Arduino UNO R4 circuit boards
 
 const int LED2 = 5;     // ARPS top-side LEDs
 const int LED3 = 6;
@@ -49,7 +49,7 @@ void setup() {
 
 // Main loop code repeats forever
 void loop() {
-  SW2state = digitalRead(SW2);
+  SW2state = digitalRead(SW2);  // Change to SW4 or SW5 for Arduino UNO R3
 
   if(SW2state == LOW) {
     digitalWrite(LED2,HIGH);
@@ -134,30 +134,30 @@ void loop() {
  *    and re-upload your program to your Arduino.
 
   // Momentary button using an if structure
-  SW3state = digitalRead(SW3);
-  if(SW3state == LOW) {
-      digitalWrite(LED3,HIGH);
+  SW4state = digitalRead(SW4);
+  if(SW4state == LOW) {
+      digitalWrite(LED4,HIGH);
   }
   else {
-      digitalWrite(LED3,LOW);
+      digitalWrite(LED4,LOW);
   }
 
   // Momentary button using a while structure
-  SW4state = digitalRead(SW4);
-  while(SW4state == LOW) {
-      digitalWrite(LED4,HIGH);
-      SW4state = digitalRead(SW4);
+  SW5state = digitalRead(SW5);
+  while(SW5state == LOW) {
+      digitalWrite(LED5,HIGH);
+      SW5state = digitalRead(SW5);
   }
-  digitalWrite(LED4,LOW);
+  digitalWrite(LED5,LOW);
 
- *    First, try pressing and releasing SW3 and SW4 one at a time. They should
+ *    First, try pressing and releasing SW4 and SW5 one at a time. They should
  *    act the same way, turning their respective LEDs on as each switch is
  *    pressed, and off as each switch is released.
  * 
- *    Next, press and hold SW3 while pressing and releasing SW4. Does SW4 work
+ *    Next, press and hold SW4 while pressing and releasing SW5. Does SW5 work
  *    as expected?
  * 
- *    Last, press and hold SW4 while pressing and releasing SW3. Does SW3 work
+ *    Last, press and hold SW5 while pressing and releasing SW4. Does SW4 work
  *    as expected?
  * 
  *    Can you explain the difference in operation between the 'if' and 'while'
@@ -165,47 +165,47 @@ void loop() {
  *
  * 7. Comment-out the second 'SW4state = digitalRead(SW4);' (the one inside 
  *    the while loop) by adding two slashes '//' at the start of the line,
- *    like this: '//SW4state = digitalRead(SW4);'. Re-upload your program and
- *    test SW4 again. After that, try testing SW2 and SW3. Do they still work?
+ *    like this: '//SW5state = digitalRead(SW5);'. Re-upload your program and
+ *    test SW5 again. After that, try testing SW2 and SW4. Do they still work?
  *    If the program seems to be getting stuck, press and release the SW1
  *    RESET pushbutton to re-start it. Explain what you think is happening and
  *    why the microcontroller might be doing that. 
  * 
  * 8. Let's explore logical conditions made using 'if' statements. Replace the
  *    program code added in steps 6 and 7, above, with this 'nested if' code
- *    to create a logical AND condition that will light LED D3 only if both
- *    SW3 and SW4 are pressed:
+ *    to create a logical AND condition that will light LED D4 only if both
+ *    SW4 and SW5 are pressed:
 
-  SW3state = digitalRead(SW3);
   SW4state = digitalRead(SW4);
+  SW5state = digitalRead(SW5);
 
-  if(SW3state == LOW) {
-    if(SW4state == LOW) {
-      digitalWrite(LED3,HIGH);
+  if(SW4state == LOW) {
+    if(SW5state == LOW) {
+      digitalWrite(LED4,HIGH);
     }
     else {
-      digitalWrite(LED3,LOW);
+      digitalWrite(LED4,LOW);
     }
   }
   else {
-    digitalWrite(LED3,LOW);
+    digitalWrite(LED4,LOW);
   }
 
  *    Test the code to ensure it works as expected. Does the order of the if
- *    conditions matter? (e.g. swap the conditional checks for SW3 and SW4)
+ *    conditions matter? (e.g. swap the conditional checks for SW4 and SW5)
  * 
  * 9. Next, replace the code from activity 8, above, with the following code
  *    which implements the logical AND conditional operator – it's composed of
  *    two ampersands '&&' and becomes part of the 'if' statement:
  
-  SW3state = digitalRead(SW3);
   SW4state = digitalRead(SW4);
+  SW5state = digitalRead(SW5);
   
-  if(SW3state == LOW && SW4state == LOW) {
-    digitalWrite(LED3,HIGH);
+  if(SW4state == LOW && SW5state == LOW) {
+    digitalWrite(LED4,HIGH);
   }
   else {
-    digitalWrite(LED3,LOW);
+    digitalWrite(LED4,LOW);
   }
 
  *    Does '&&' work the same way as the nested if structures? Can you think of
@@ -215,17 +215,17 @@ void loop() {
  * 10. Replace the double ampersand '&&' with double vertical bars '||' to make
  *    a logical OR conditional operator. Your code should now look like this:
   
-  SW3state = digitalRead(SW3);
   SW4state = digitalRead(SW4);
+  SW5state = digitalRead(SW5);
   
-  if(SW3state == LOW || SW4state == LOW) {
-    digitalWrite(LED3,HIGH);
+  if(SW4state == LOW || SW5state == LOW) {
+    digitalWrite(LED4,HIGH);
   }
   else {
-    digitalWrite(LED3,LOW);
+    digitalWrite(LED4,LOW);
   }
 
- *    Describe the conditions under which LED3 turns on.
+ *    Describe the conditions under which LED4 turns on.
  * 
  * Programming Activities
  * 
@@ -298,15 +298,15 @@ void loop() {
  *    do they follow? Explain why this happens.
  * 
  * 6. Use individual 'if' structures to simulate 'Start' and 'Stop' buttons for
- *    an industrial machine. Use SW3 as the Start button to turn LED D3 on when
- *    it is pressed, and keep LED D3 on even after SW3 has been released. Use
- *    SW4 as the Stop button to turn LED D3 off when it is pressed. Test your
+ *    an industrial machine. Use SW4 as the Start button to turn LED D4 on when
+ *    it is pressed, and keep LED D4 on even after SW4 has been released. Use
+ *    SW5 as the Stop button to turn LED D4 off when it is pressed. Test your
  *    program to make sure that it works the way you expect it to.
  * 
  * 7. Running your program from step 6, above, describe what happens when both
- *    pushbuttons SW3 and SW4 are held. Does LED D3 turn on? Does LED D3 stay
+ *    pushbuttons SW4 and SW5 are held. Does LED D4 turn on? Does LED D4 stay
  *    on? If so, is its brightness the same when both buttons are held as when
- *    just SW3 is pressed? If the brightness is different, can you explain what
+ *    just SW4 is pressed? If the brightness is different, can you explain what
  *    part of the code might be causing it to change, and why it changes?
  *    Hint: pretend to be the computer and simulate what the program is doing.
  * 
@@ -314,8 +314,8 @@ void loop() {
  *    output even while its 'Stop' button is pressed represents a significant
  *    safety hazard. Using one or more of the logical conditional operators
  *    introduced in the analysis activities, above, modify your start-stop
- *    program to make it safer. SW3 should only be able to turn LED D3 on if
- *    switch SW4 is not being pressed at the same time.
+ *    program to make it safer. SW4 should only be able to turn LED D4 on if
+ *    switch SW5 is not being pressed at the same time.
  *
  * 9. Create a program that uses the ARPS pushbuttons and LEDs to make a turn
  *    signal circuit for a bicycle. Use SW2 and SW5 to indicate left or right
